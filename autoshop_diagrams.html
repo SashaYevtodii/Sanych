@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Autoshop – Діаграми</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            background-color: #111;
+            color: #eee;
+        }
+
+        header {
+            background-color: #c20000;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        .admin-header h1 {
+            margin: 0;
+            font-size: 28px;
+        }
+
+        main {
+            padding: 40px;
+        }
+
+        .charts-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            justify-content: center;
+        }
+
+        .chart-box {
+            background-color: #222;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(255, 0, 0, 0.3);
+            width: 500px;
+        }
+
+        .chart-box h2 {
+            margin-bottom: 20px;
+            font-size: 20px;
+            text-align: center;
+            color: #ff4444;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #000;
+            color: #bbb;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="admin-header">
+            <h1>Autoshop – Діаграми</h1>
+        </div>
+    </header>
+
+    <main>
+        <div class="charts-container">
+            <div class="chart-box">
+                <h2>Продажі по марках авто</h2>
+                <canvas id="barChart"></canvas>
+            </div>
+            <div class="chart-box">
+                <h2>Доходи по категоріях</h2>
+                <canvas id="pieChart"></canvas>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Autoshop – Адмін-панель</p>
+    </footer>
+
+    <script>
+        // Гістограма: Продажі по марках
+        const barCtx = document.getElementById('barChart').getContext('2d');
+        new Chart(barCtx, {
+            type: 'bar',
+            data: {
+                labels: ['BMW', 'Audi', 'Toyota', 'Ford', 'Tesla'],
+                datasets: [{
+                    label: 'Кількість продажів',
+                    data: [12, 19, 7, 14, 9],
+                    backgroundColor: '#ff0000',
+                    borderColor: '#aa0000',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { color: '#fff' },
+                        grid: { color: '#444' }
+                    },
+                    x: {
+                        ticks: { color: '#fff' },
+                        grid: { color: '#444' }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: { color: '#fff' }
+                    }
+                }
+            }
+        });
+
+        // Кругова діаграма: Доходи по категоріях
+        const pieCtx = document.getElementById('pieChart').getContext('2d');
+        new Chart(pieCtx, {
+            type: 'pie',
+            data: {
+                labels: ['Автомобілі', 'Запчастини', 'Сервіс', 'Аксесуари'],
+                datasets: [{
+                    label: 'Доходи',
+                    data: [45, 25, 20, 10],
+                    backgroundColor: ['#ff1a1a', '#cc0000', '#990000', '#660000'],
+                    borderColor: '#000',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        labels: { color: '#fff' }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
